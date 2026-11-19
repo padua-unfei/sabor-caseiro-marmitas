@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marmitaria Sabor Caseiro | Cardápio & Pedidos Online</title>
+  <meta name="description" content="Chatbot inteligente para pedidos de marmitas, totalmente client-side em JavaScript seguindo a metodologia clássica de processamento determinístico.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%3E<text y=%2226%22 font-size=%2224%22>🍱</text></svg>">
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">🍱</div>
+        <div>
+          <h1>Marmitaria Sabor Caseiro</h1>
+          <p>Comida Caseira Quentinha • Atendimento Inteligente</p>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="day-selector-wrapper">
+          <label for="daySelector">📅 Cardápio de:</label>
+          <select id="daySelector" title="Selecione o dia da semana">
+            <option value="0">Domingo</option>
+            <option value="1">Segunda-feira</option>
+            <option value="2">Terça-feira</option>
+            <option value="3">Quarta-feira</option>
+            <option value="4">Quinta-feira</option>
+            <option value="5">Sexta-feira</option>
+            <option value="6">Sábado</option>
+          </select>
+        </div>
+        <span class="badge-tag">Sem API / Sem LLM</span>
+        <span class="badge-tag">🔒 Guardrails Ativos</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <main class="main-layout">
+    <!-- Left Sidebar: Menu Rápido e Carrinho em Tempo Real -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>🧺 Seu Pedido em Tempo Real</h2>
+      </div>
+
+      <div class="sidebar-content">
+        <!-- Carrinho Dinâmico -->
+        <div class="sidebar-section">
+          <h3>
+            <span>Itens no Carrinho</span>
+            <span class="badge-count" id="cartBadge">0</span>
+          </h3>
+          <div id="sidebarCartList" class="sidebar-cart-list">
+            <!-- Renderizado via app.js -->
+          </div>
+          <div id="sidebarTotals">
+            <!-- Totais renderizados via app.js -->
+          </div>
+        </div>
+
+        <!-- Atalhos Rápidos do Cardápio -->
+        <div class="sidebar-section">
+          <h3>Pratos do Dia (Clique p/ Pedir)</h3>
+          <div id="sidebarMenuMini" class="quick-menu-mini">
+            <!-- Renderizado via app.js -->
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right: Chatbot Conversacional Interativo -->
+    <section class="chat-panel">
+      <div class="chat-header">
+        <div class="chat-header-title">
+          <span class="online-dot" title="Online e pronto para atender"></span>
+          <div>
+            <strong>Atendente Virtual Sabor Caseiro</strong>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Atendimento instantâneo no navegador</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Área de Histórico de Mensagens -->
+      <div class="chat-messages" id="chatMessages" role="log" aria-live="polite">
+        <!-- Mensagens inseridas dinamicamente via app.js -->
+      </div>
+
+      <!-- Barra de Atalhos Rápidos / Sugestões para o Usuário -->
+      <div class="quick-prompts-bar">
+        <button class="chip-btn" onclick="window.sendQuickPrompt('Ver cardápio de hoje')">📋 Ver cardápio</button>
+        <button class="chip-btn" onclick="window.sendQuickPrompt('Quero 1 bife de vaca bem passado e sem cebola')">🥩 Bife sem cebola</button>
+        <button class="chip-btn" onclick="window.sendQuickPrompt('Quanto custa a entrega e qual o valor total?')">💰 Consultar total</button>
+        <button class="chip-btn" onclick="window.sendQuickPrompt('Quero 1 marmita vegetariana com pouco sal')">🥦 Marmita Veggie</button>
+        <button class="chip-btn" onclick="window.sendQuickPrompt('Finalizar pedido')">✅ Finalizar Pedido</button>
+      </div>
+
+      <!-- Barra de Envio de Texto -->
+      <div class="chat-input-area">
+        <input 
+          type="text" 
+          id="userInput" 
+          placeholder="Digite seu pedido (ex: Quero 1 bife bem passado sem cebola...)" 
+          autocomplete="off"
+          aria-label="Mensagem para o atendente da marmitaria"
+        >
+        <button id="sendBtn" class="btn-send" aria-label="Enviar mensagem">
+          <span>Enviar</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Scripts: Engine + Guardrails + Cardápio + UI -->
+  <script src="menu-data.js"></script>
+  <script src="guardrails.js"></script>
+  <script src="chat-engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
